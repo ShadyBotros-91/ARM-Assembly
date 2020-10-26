@@ -1,0 +1,56 @@
+
+
+
+ARM Macro Assembler    Page 1 
+
+
+    1 00000000         ; P = Q + R + S
+    2 00000000         ; let Q=2 , R=4 , S=5
+    3 00000000         
+    4 00000000                 AREA             eg3 , CODE , READONLY
+    5 00000000                 ENTRY
+    6 00000000                 EXPORT           __main
+    7 00000000         
+    8 00000000         __main
+    9 00000000 DE00            ADR              R4,Vals     ; R4 points to vals
+                                                             area
+   10 00000002 6861            LDR              R1,[R4,#Q]  ; load Q=2 into R1
+   11 00000004 68A2            LDR              R2,[R4,#R]  ; load R=4 into R2
+   12 00000006 68E3            LDR              R3,[R4,#S]  ; load S=5 into R3 
+                                                            
+   13 00000008         
+   14 00000008 EB01 0002       ADD              R0,R1,R2
+   15 0000000C 4418            ADD              R0,R0,R3
+   16 0000000E         
+   17 0000000E 6020            STR              R0,[R4,#P]
+   18 00000010         
+   19 00000010 E7FE    Stop    B                Stop
+   20 00000012         
+   21 00000012         
+   22 00000012 00000000 
+                       P       EQU              0
+   23 00000012 00000004 
+                       Q       EQU              4
+   24 00000012 00000008 
+                       R       EQU              8
+   25 00000012 0000000C 
+                       S       EQU              12
+   26 00000012         
+   27 00000012         
+   28 00000012                 AREA             eg3 , DATA , READONLY
+   29 00000012         
+   30 00000012 00 00 00 
+              00       Vals    SPACE            4
+   31 00000016 00 00 00000002  DCD              2           ; declaring variabl
+                                                            es
+   32 0000001C 00000004        DCD              4
+   33 00000020 00000005        DCD              5
+   34 00000024         
+   35 00000024                 END
+Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M4.fp.sp --apcs=
+interwork --depend=.\objects\main.d -o.\objects\main.o -I.\RTE\_Cortex-M4 -IC:\
+Users\Shady\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include -IC:\Use
+rs\Shady\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device
+\ST\STM32F4xx\Include --predefine="__EVAL SETA 1" --predefine="__MICROLIB SETA 
+1" --predefine="__UVISION_VERSION SETA 529" --predefine="_RTE_ SETA 1" --predef
+ine="STM32F429xx SETA 1" --list=.\listings\main.lst main.s
