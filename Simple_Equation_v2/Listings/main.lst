@@ -1,0 +1,129 @@
+
+
+
+ARM Macro Assembler    Page 1 
+
+
+    1 00000000         ;P = Q + R + S
+    2 00000000         ;let Q=2, R=4, S=5
+    3 00000000         
+    4 00000000         
+    5 00000000                 AREA             SimpleAddData , DATA , READONLY
+    6 00000000 00 00 00 
+              00       P       SPACE            4           ; Reserve 4 bytes o
+                                                            f memory
+    7 00000004 00000002 
+                       Q       DCD              2           ; create variable Q
+                                                             with initial value
+                                                             2  (Q = 0x00000002
+                                                            )
+    8 00000008 00000004 
+                       R       DCD              4           ; create variable R
+                                                             with initial value
+                                                             4 
+    9 0000000C 00000005 
+                       S       DCD              5           ; create variable S
+                                                             with initial value
+                                                             5  
+   10 00000010         
+   11 00000010                 AREA             SimpleAddCode , CODE , READONLY
+   12 00000000                 ENTRY
+   13 00000000                 EXPORT           __main
+   14 00000000         
+   15 00000000         __main
+   16 00000000 F85F 1004       LDR              R1, Q
+   17 00000004 F85F 2004       LDR              R2, R
+   18 00000008 F85F 3004       LDR              R3, S
+   19 0000000C         
+   20 0000000C EB01 0002       ADD              R0,R1,R2
+   21 00000010 4418            ADD              R0,R0,R3
+   22 00000012         
+   23 00000012 E7FE    Stop    B                Stop
+   24 00000014         
+   25 00000014                 END
+Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M4.fp.sp --apcs=
+interwork --depend=.\objects\main.d -o.\objects\main.o -I.\RTE\_Cortex-M4 -IC:\
+Users\Shady\AppData\Local\Arm\Packs\ARM\CMSIS\5.6.0\CMSIS\Core\Include -IC:\Use
+rs\Shady\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device
+\ST\STM32F4xx\Include --predefine="__EVAL SETA 1" --predefine="__MICROLIB SETA 
+1" --predefine="__UVISION_VERSION SETA 529" --predefine="_RTE_ SETA 1" --predef
+ine="STM32F429xx SETA 1" --list=.\listings\main.lst main.s
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Relocatable symbols
+
+P 00000000
+
+Symbol: P
+   Definitions
+      At line 6 in file main.s
+   Uses
+      None
+Comment: P unused
+Q 00000004
+
+Symbol: Q
+   Definitions
+      At line 7 in file main.s
+   Uses
+      At line 16 in file main.s
+Comment: Q used once
+R 00000008
+
+Symbol: R
+   Definitions
+      At line 8 in file main.s
+   Uses
+      At line 17 in file main.s
+Comment: R used once
+S 0000000C
+
+Symbol: S
+   Definitions
+      At line 9 in file main.s
+   Uses
+      At line 18 in file main.s
+Comment: S used once
+SimpleAddData 00000000
+
+Symbol: SimpleAddData
+   Definitions
+      At line 5 in file main.s
+   Uses
+      None
+Comment: SimpleAddData unused
+5 symbols
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Relocatable symbols
+
+SimpleAddCode 00000000
+
+Symbol: SimpleAddCode
+   Definitions
+      At line 11 in file main.s
+   Uses
+      None
+Comment: SimpleAddCode unused
+Stop 00000012
+
+Symbol: Stop
+   Definitions
+      At line 23 in file main.s
+   Uses
+      At line 23 in file main.s
+Comment: Stop used once
+__main 00000000
+
+Symbol: __main
+   Definitions
+      At line 15 in file main.s
+   Uses
+      At line 13 in file main.s
+Comment: __main used once
+3 symbols
+344 symbols in table
