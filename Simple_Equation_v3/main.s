@@ -6,7 +6,7 @@
 		EXPORT __main
 
 __main  
-        ADRL	R4,Vals		; R4 points to vals area
+                ADRL	        R4,Vals		; R4 points to vals area
 		LDR		R1,[R4,#Q]	; load Q=2 into R1
 		LDR		R2,[R4,#R]	; load R=4 into R2
 		LDR		R3,[R4,#S]	; load S=5 into R3 
